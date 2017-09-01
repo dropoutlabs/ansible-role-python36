@@ -1,0 +1,36 @@
+---
+# tasks file for python36
+- apt:
+    name: python3.5
+    state: build-dep
+    update_cache: yes
+
+- file:
+    path: /home/src
+    state: directory
+
+- get_url:
+    url: https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tgz
+    dest: /home/src/
+
+- unarchive:
+    src: /home/src/Python-3.6.2.tgz
+    dest: /home/src/
+    remote_src: yes
+
+- shell: |
+    ./configure
+    make
+    make altinstall
+  args:
+    chdir: /home/src/Python-3.6.2
+  register: out
+
+- debug: var=out.stdout_lines
+
+- pip:
+    name: "{{ item }}"
+    executable: pip3.6
+  with_items:
+    - virtualenvwrapper
+
