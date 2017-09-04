@@ -1,17 +1,47 @@
 ---
 # tasks file for python36
+- apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 36A1D7869245C8950F966E92D8576A8BA88D21E9
+
+- apt_repository:
+    repo: deb-src http://us.archive.ubuntu.com/ubuntu/ xenial main restricted
+    state: present
+
+# XXX
 - apt:
-    name: python3.5
-    state: build-dep
-    update_cache: yes
+    name: apt-utils
+    state: present
+
+# - apt:
+#     name: python3-minimal
+#     state: present
+
+# # XXX
+# - file:
+#     path: /usr/share/python3/debpython/__pycache__
+#     state: absent
+
+# - name: ???
+#   apt:
+#     name: python3.5
+#     state: build-dep
+#     # update_cache: yes
+
+# https://github.com/ansible/ansible-container/issues/551#issuecomment-311536992
+- name: ???
+  shell: env -i PATH=$PATH bash -c "apt-get build-dep -y python3.5"
 
 - file:
     path: /home/src
     state: directory
 
-- get_url:
-    url: https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tgz
-    dest: /home/src/
+# # https://github.com/ansible/ansible/issues/23642
+# - get_url:
+#     url: https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tgz
+#     dest: /home/src/
+
+- command: curl -k https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tgz -o /home/src/Python-3.6.2.tgz
 
 - unarchive:
     src: /home/src/Python-3.6.2.tgz
@@ -28,9 +58,10 @@
 
 - debug: var=out.stdout_lines
 
-- pip:
-    name: "{{ item }}"
-    executable: pip3.6
-  with_items:
-    - virtualenvwrapper
+# - pip:
+#     name: "{{ item }}"
+#     executable: pip3.6
+#   with_items:
+#     - virtualenvwrapper
+
 
