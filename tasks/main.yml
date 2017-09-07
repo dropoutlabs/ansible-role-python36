@@ -58,11 +58,12 @@
 
 - debug: var=out.stdout_lines
 
-- pip:
-    name: "{{ item }}"
-    executable: pip3.6
-  with_items:
-    # - virtualenvwrapper
-    - jupyter
+# - pip:
+#     name: "{{ item }}"
+#     executable: pip3.6
+#   with_items:
+#     # - virtualenvwrapper
+#     - jupyter
 
-
+# XXX
+- shell: env -i PATH=$PATH bash -c "pip3.6 install jupyter"
