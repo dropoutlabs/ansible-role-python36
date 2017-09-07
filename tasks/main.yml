@@ -58,10 +58,11 @@
 
 - debug: var=out.stdout_lines
 
-# - pip:
-#     name: "{{ item }}"
-#     executable: pip3.6
-#   with_items:
-#     - virtualenvwrapper
+- pip:
+    name: "{{ item }}"
+    executable: pip3.6
+  with_items:
+    # - virtualenvwrapper
+    - jupyter
 
 
