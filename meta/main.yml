@@ -1,7 +1,7 @@
 galaxy_info:
   author: Yakov Zaytsev
   description: Builds Python 3.6 from source, make altinstalls and pip installs jupyter
-  company: Dropout Labs
+  company: YSZ
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
